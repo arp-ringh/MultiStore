@@ -37,7 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'store',
+    'apps.store.apps.StoreConfig',
+    'apps.product.apps.ProductConfig',
+    'apps.vendor.apps.VendorConfig',
+    'apps.cart.apps.CartConfig',
+    'apps.order.apps.OrderConfig',
+    'apps.customers.apps.CustomersConfig',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +68,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.product.context_processors.bulk_categories',
+                'apps.product.context_processors.bulk_subcategories',
             ],
         },
     },
@@ -116,8 +123,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+import os
+
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
+
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
