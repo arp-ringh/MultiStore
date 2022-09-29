@@ -4,11 +4,15 @@
    {% include 'product/parts/filter.html' %}
                        
                     {% for product in subcategory.products.all %}
+                    {% comment %}
                         {% if product.labels != 'featured' and  product.labels != 'offer' %}
+                    {% endcomment %}
 
                             {% include 'product/parts/single-item.html' %}                 
                     
+                    {% comment %}
                         {% endif %}
+                    {% endcomment %}
                     {% endfor %}
                     
                     <div class="col-12">

@@ -29,7 +29,7 @@ class frontpage(BaseView):
         # self.views['featured_products'] = Product.objects.filter(labels= 'featured')
         # self.views['recent_products'] = Product.objects.filter(labels= '')[0:8]
 
-        featured_products = Product.objects.filter(labels= 'featured')
+        featured_products = Product.objects.filter(labels= 'featured')[0:8]
         # self.views['featured_products'] = get_object_or_404(featured_products)
         if featured_products.exists():
             self.views['featured_products'] = get_list_or_404(featured_products)
