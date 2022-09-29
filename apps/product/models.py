@@ -5,6 +5,7 @@ from django.core.files import File
 # Create your models here.
 
 CAT_STAT = (('active', 'active'), ('', 'default'))
+FEATURED = (('featured', 'Featured'), ('offer', 'Offer'), ('', 'Default'))
 
 
 class Category(models.Model):
@@ -12,6 +13,7 @@ class Category(models.Model):
     slug = models.CharField(max_length=255)
     image = models.ImageField(upload_to="category/images")
     status = models.CharField(choices=CAT_STAT, blank=True, max_length=100)
+    description = models.TextField()
 
     def __str__(self):
         return self.name
@@ -29,13 +31,14 @@ class Subcategory(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
-    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
-    subcategory = models.ForeignKey(Subcategory, related_name='products', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='products', null=True, on_delete=models.CASCADE)
+    subcategory = models.ForeignKey(Subcategory, related_name='products', blank=True, null=True, on_delete=models.CASCADE)
     slug = models.CharField(max_length=255, unique=True)
     discounted_price = models.IntegerField()
     description = models.TextField()
     overview = models.TextField()
     #labels = models.CharField(choices)
+    labels = models.CharField(max_length=50, choices=FEATURED, blank=True)
     price = models.IntegerField()
     date_added = models.DateTimeField(auto_now_add=True)
     #vendor = models.ForeignKey(Vendor, related_name='products', on_delete=models.CASCADE)
@@ -60,7 +63,7 @@ class Product(models.Model):
             else:
                 return 'https://via.placeholder.com/240x180.jpg'
 
-    def make_thumbnail(self, image, size=(300,200)):
+    def make_thumbnail(self, image, size=(500,500)):
         img = Image.open(image)
         img.convert('RGB')
         img.thumbnail(size)

@@ -118,22 +118,33 @@
 
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                     <div class="navbar-nav w-100">
-                        
+                        {% if bulk_categories.exists %} 
                         {% for category in bulk_categories %}
 
+                        <!-- 
+                            #### url pattern as below #######
+                            app_name = "product"  
+                            #### url pattern as below #######
+                            # as we have defined app_name in urls.py
+                            # any url to be defined for rendering template should contain apps name as below
+                            # appname:namespace
+                            [ url 'product:category' category.slug ]
+                            # if app_name was not declared no need to give appname before namespace
+                        -->
+
                         <div class="nav-item dropdown dropright">
-                        <a href="#{{ category.slug }}" class="nav-link dropdown-toggle" data-toggle="dropdown">{{category.name}}<i class="fa fa-angle-right float-right mt-1"></i></a>
+                        <a href="{% url 'product:category' category.slug %}" class="nav-link dropdown-toggle" data-toggle="dropdown">{{category.name}}<i class="fa fa-angle-right float-right mt-1"></i></a>
 
                         <div id="{{ category.slug }}" class="dropdown-menu position-absolute rounded-0 border-0 m-0">
                                 {% for subcategory in bulk_subcategories  %}
                                 {% if subcategory.category_id == category.id %}
-                                    <a href="" class="dropdown-item">{{ subcategory.name }}</a>
+                                    <a href="{% url 'product:subcategory' category.slug subcategory.slug %}" class="dropdown-item">{{ subcategory.name }}</a>
                                 {% endif %}
                                 {% endfor%}
                         </div>
                         </div>
-                        
                         {% endfor %}
+                        {% endif %} 
                      </div>
                 </nav>
 
