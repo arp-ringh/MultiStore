@@ -1,5 +1,10 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
 from django.views.generic import View
+
+from django.contrib.auth import login, logout
+from django.contrib import messages, auth
+
+
 from . models import *
 
 from apps.product.models import Product
@@ -78,3 +83,8 @@ def faqs(request):
     views = {}
     return render(request, 'store/faqs.html', views)
 
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
