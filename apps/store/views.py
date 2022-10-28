@@ -43,7 +43,18 @@ class frontpage(BaseView):
         if recent_products.exists():
             self.views['recent_products'] = get_list_or_404(recent_products)
 
-        return render(request, 'store/frontpage.html',self.views)
+        #return render(request, 'store/frontpage.html',self.views)
+
+        # Check if a user is logged in and is authenticated for views
+        if request.user.is_authenticated:
+            if request.user.is_customer:
+                return redirect('customers:customerdash')
+            elif request.user.is_vendor:
+                return redirect('vendor:vendordash')
+            else:
+                return redirect('admin/')
+        else:
+            return render(request, 'store/frontpage.html',self.views)
 
 """
 def store(request):

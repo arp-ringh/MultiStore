@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Slider, Offer
+from .models import Slider, Offer, CustomUser
 
 # Register your models here.
 
@@ -9,5 +9,6 @@ from .models import Slider, Offer
 
 admin.site.register(Slider)
 admin.site.register(Offer)
+admin.site.register(CustomUser)
 
 

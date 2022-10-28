@@ -42,6 +42,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     date_added = models.DateTimeField(auto_now_add=True)
     #vendor = models.ForeignKey(Vendor, related_name='products', on_delete=models.CASCADE)
+    vendor = models.ForeignKey('vendor.Vendor', related_name='products', on_delete=models.CASCADE)
     image = models.ImageField(upload_to="product/images", blank=True, null=True)
     thumbnail = models.ImageField(upload_to="product/thumbnails", blank=True, null=True)
 

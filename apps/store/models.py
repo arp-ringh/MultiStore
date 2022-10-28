@@ -1,5 +1,7 @@
 from django.db import models
 from apps.product.models import Category, Product
+
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 
@@ -38,3 +40,11 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class CustomUser(AbstractUser):
+
+    is_vendor = models.BooleanField(default=False)
+    is_customer = models.BooleanField(default=False)
+
+
