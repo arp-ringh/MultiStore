@@ -115,7 +115,7 @@ def delete_product(request, product_id):
 
     return redirect('vendor:vendordash')
 
-
+"""
 @login_required
 @vendor_required
 def vendorDash(request):
@@ -124,5 +124,18 @@ def vendorDash(request):
     products = vendor.products.all()
 
     return render(request, 'vendor/vendor-dash.html',{'vendor':vendor, 'products':products})
+"""
 
 
+from django.core.paginator import Paginator
+@login_required
+@vendor_required
+def vendorDash(request):
+    vendor = request.user.vendor
+    query = vendor.products.all()
+    paginator = Paginator(query,10)
+
+    page_number = request.GET.get('page')
+    products = paginator.get_page(page_number)
+
+    return render(request, 'vendor/vendor-dash.html',{'vendor':vendor, 'products':products})
