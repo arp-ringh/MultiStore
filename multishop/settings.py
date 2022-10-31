@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'apps.order.apps.OrderConfig',
     'apps.customers.apps.CustomersConfig',
     'crispy_forms',
+    'corsheaders',
+
 
 ]
 
@@ -58,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'multishop.urls'
@@ -75,6 +79,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'apps.product.context_processors.bulk_categories',
                 'apps.product.context_processors.bulk_subcategories',
+                'apps.cart.context_processors.cart',
             ],
         },
     },
@@ -86,6 +91,12 @@ AUTH_USER_MODEL = 'store.CustomUser'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+CORS_ORIGIN_ALLOW_ALL = True
+SESSION_COOKIE_AGE = 86400
+CART_SESSION_ID = 'cart'
+
+STRIPE_PUB_KEY = 'pk_test_51LUNz7JmoA2IMczXjKPAz7udbHuk5l2jDe0Do00DnoOJF4ETMEhUT5pVarMzaWrBRdMVfdYEZkAA6GPhFysDygM7009xRPt8G3'
+STRIPE_SECRET_KEY = 'sk_test_51LUNz7JmoA2IMczXS6ZCKFcZIN0f8Ei6TugLBEoImbj6FrUeA9uf8wlVmV1LPSEFWIBhr9bkXg4GTIVSeIroa3Y100KVfvqMVW'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
