@@ -3,6 +3,8 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 
 import random
+from apps.cart.cart import Cart
+from .forms import AddToCartForm
 
 from .models import Category, Subcategory, Product
 # Create your views here.
@@ -35,6 +37,19 @@ def subcategory(request, category_slug, subcategory_slug):
 
 def product(request, category_slug, product_slug):
     product = get_object_or_404(Product, category__slug=category_slug, slug=product_slug)
+
+    # Cart Functionality
+    cart = Cart(request)
+    # Add to cart Section
+    if request.method == "POST":
+        form = AddToCartForm(request.POST)
+
+        if form.is_valid():
+            quantity = form.cleaned_data['quantity']
+            cart.add(product_id=product.id, quantity=quantity, update_quantity=False)
+            return redirect('product:product', category_slug=category_slug, product_slug=product_slug)
+    else:
+        form = AddToCartForm()
 
     # Similar Products Section
     similar_products = list(product.category.products.exclude(id=product.id))
