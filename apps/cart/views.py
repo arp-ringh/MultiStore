@@ -7,8 +7,6 @@ from .cart import Cart
 from .forms import CheckoutForm
 from apps.order.utilities import checkout, notify_vendor, notify_customer
 
-
-# Create your views here.
 def cart_detail(request):
     cart = Cart(request)
 
@@ -17,13 +15,14 @@ def cart_detail(request):
 
         if form.is_valid():
             stripe.api_key = settings.STRIPE_SECRET_KEY
+
             stripe_token = form.cleaned_data['stripe_token']
             try:
                 charge = stripe.Charge.create(
-                            amount=int(cart.get_total_cost() * 100),
-                            currency='USD',
-                            description='Charge from MultiShop',
-                            source=stripe_token
+                    amount=int(cart.get_total_cost() * 100),
+                    currency='USD',
+                    description='Charge from Interiorshop',
+                    source=stripe_token
                 )
 
                 first_name = form.cleaned_data['first_name']
@@ -34,7 +33,7 @@ def cart_detail(request):
                 zipcode = form.cleaned_data['zipcode']
                 place = form.cleaned_data['place']
 
-                order = checkout(request, first_name, last_name, email, phone, address, zipcode, place, cart.get_totlal_cost())
+                order = checkout(request, first_name, last_name, email, address, zipcode, place, phone, cart.get_total_cost())
 
                 cart.clear()
 
@@ -44,8 +43,7 @@ def cart_detail(request):
                 return redirect('success')
 
             except Exception:
-                messages.error(request, "This was something wrong with the paymeent")
-
+                messages.error(request, "There was something wrong with the payment")
     else:
         form = CheckoutForm()
 
@@ -56,14 +54,26 @@ def cart_detail(request):
     if remove_from_cart:
         cart.remove(remove_from_cart)
 
-        return redirect('cart')
+        return redirect('cart:cart')
 
     if change_quantity:
-        cart.add(quantity, quantity, True)
+        cart.add(change_quantity, quantity, True)
 
-        return redirect('cart')
+        return redirect('cart:cart')
 
-    return render(request, 'cart/cart.html', {'form':form, 'stripe_pub_key': settings.STRIPE_PUB_KEY})
+    return render(request, 'cart/cart.html', {'form': form, 'stripe_pub_key': settings.STRIPE_PUB_KEY})
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def success(request):

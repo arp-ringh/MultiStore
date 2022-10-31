@@ -1,6 +1,7 @@
 from django.conf import settings
 from apps.product.models import Product
 
+
 class Cart(object):
     def __init__(self, request):
         self.session = request.session
@@ -27,7 +28,7 @@ class Cart(object):
         product_id = str(product_id)
 
         if product_id not in self.cart:
-            self.cart[product_id] = {'quantity':1, 'id':product_id}
+            self.cart[product_id] = {'quantity': 1, 'id': product_id}
 
         if update_quantity:
             self.cart[product_id]['quantity'] += int(quantity)
@@ -39,11 +40,11 @@ class Cart(object):
 
     def remove(self, product_id):
         if product_id in self.cart:
-            del self.cart['product_id']
+            del self.cart[product_id]
             self.save()
 
     def save(self):
-        self.session[settings.CART_SESSION_ID]= self.cart
+        self.session[settings.CART_SESSION_ID] = self.cart
         self.session.modified = True
 
     def clear(self):
@@ -56,6 +57,9 @@ class Cart(object):
 
         return sum(item['quantity'] * item['product'].price for item in self.cart.values())
 
+    def grand_total(self):
+        get_total_cost= self.get_total_cost()
+        shipping = 150
+        grand_total = get_total_cost + shipping
 
-
-
+        return grand_total
