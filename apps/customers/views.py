@@ -35,4 +35,3 @@ def customerDash(request):
     views = {}
 
     return render(request, 'customers/customer-dash.html', views )
-

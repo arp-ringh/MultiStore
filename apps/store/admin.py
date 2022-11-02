@@ -10,5 +10,3 @@ from .models import Slider, Offer, CustomUser
 admin.site.register(Slider)
 admin.site.register(Offer)
 admin.site.register(CustomUser)
-
-

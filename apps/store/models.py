@@ -9,7 +9,8 @@ from django.contrib.auth.models import AbstractUser
 # Sliders
 # Special Offers
 STATUS = (('active', 'active'), ('', 'default'))
-RANK = (('1', '1'),('2', '2'),('3', '3'),('4', '4'))
+RANK = (('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'))
+
 
 class Offer(models.Model):
     name = models.CharField(max_length=300)
@@ -46,5 +47,3 @@ class CustomUser(AbstractUser):
 
     is_vendor = models.BooleanField(default=False)
     is_customer = models.BooleanField(default=False)
-
-

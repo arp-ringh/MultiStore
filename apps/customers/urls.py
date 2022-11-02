@@ -9,4 +9,3 @@ urlpatterns = [
     path('dashboard/customer/', views.customerDash, name='customerdash'),
 
 ]
-

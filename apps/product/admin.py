@@ -20,3 +20,4 @@ class SubcategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug')
     list_filter = ('category',)
     prepopulated_fields = {'slug': ('name',)}
+

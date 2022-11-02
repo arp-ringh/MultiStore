@@ -6,6 +6,7 @@ def bulk_categories(request):
 
     return {'bulk_categories': categories}
 
+
 def bulk_subcategories(request):
     subcategories = Subcategory.objects.all()[0:4]
 

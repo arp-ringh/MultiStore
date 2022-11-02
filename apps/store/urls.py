@@ -17,4 +17,3 @@ urlpatterns = [
     path('faqs', views.checkout, name='faqs'),
     path('accounts/logout', views.logout, name='logout'),
 ]
-
