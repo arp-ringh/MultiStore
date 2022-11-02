@@ -59,8 +59,8 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 ]
 
@@ -91,12 +91,19 @@ AUTH_USER_MODEL = 'store.CustomUser'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-CORS_ORIGIN_ALLOW_ALL = True
+#CORS_ORIGIN_ALLOW_ALL = True
 SESSION_COOKIE_AGE = 86400
 CART_SESSION_ID = 'cart'
 
-STRIPE_PUB_KEY = 'pk_test_51LUNz7JmoA2IMczXjKPAz7udbHuk5l2jDe0Do00DnoOJF4ETMEhUT5pVarMzaWrBRdMVfdYEZkAA6GPhFysDygM7009xRPt8G3'
-STRIPE_SECRET_KEY = 'sk_test_51LUNz7JmoA2IMczXS6ZCKFcZIN0f8Ei6TugLBEoImbj6FrUeA9uf8wlVmV1LPSEFWIBhr9bkXg4GTIVSeIroa3Y100KVfvqMVW'
+
+#STRIPE_PUB_KEY = 'pk_test_51LUNz7JmoA2IMczXjKPAz7udbHuk5l2jDe0Do00DnoOJF4ETMEhUT5pVarMzaWrBRdMVfdYEZkAA6GPhFysDygM7009xRPt8G3'
+#STRIPE_SECRET_KEY = 'sk_test_51LUNz7JmoA2IMczXS6ZCKFcZIN0f8Ei6TugLBEoImbj6FrUeA9uf8wlVmV1LPSEFWIBhr9bkXg4GTIVSeIroa3Y100KVfvqMVW'
+
+
+STRIPE_PUB_KEY = 'pk_test_51LzKoHAU5Vcqx3suQD50KkWL8evRbRs1DUPKxgoEPtop0uSXWh1Ptoxseu9kZifNMPazJ7a3lkHu58iwRG7ASUhQ00qVbdiZxO'
+STRIPE_SECRET_KEY = 'sk_test_51LzKoHAU5Vcqx3suyD7F3z1oV6Qi9x44XstXWBwNucoVqV6K9TbAMrNyYyI4ZuCuRAsSk16ZwqG0WvLIODGi038R00opH82F1E'
+
+
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 

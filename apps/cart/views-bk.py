@@ -7,9 +7,9 @@ from .cart import Cart
 from .forms import CheckoutForm
 from apps.order.utilities import checkout, notify_vendor, notify_customer
 
-
 def cart_detail(request):
     cart = Cart(request)
+
     remove_from_cart = request.GET.get('remove_from_cart', '')
     change_quantity = request.GET.get('change_quantity', '')
     quantity = request.GET.get('quantity')
@@ -40,7 +40,7 @@ def cart_checkout(request):
                 charge = stripe.Charge.create(
                     amount=int(cart.get_total_cost() * 100),
                     currency='USD',
-                    description='Charge from MultiShop',
+                    description='Charge from Interiorshop',
                     source=stripe_token
                 )
 
@@ -56,10 +56,10 @@ def cart_checkout(request):
 
                 cart.clear()
 
-                #notify_customer(order)
-                #notify_vendor(order)
+                notify_customer(order)
+                notify_vendor(order)
 
-                return redirect('cart:success')
+                return redirect('success')
 
             except Exception:
                 messages.error(request, "There was something wrong with the payment")
@@ -69,5 +69,14 @@ def cart_checkout(request):
     return render(request, 'cart/cartcheckout.html', {'form': form, 'stripe_pub_key': settings.STRIPE_PUB_KEY})
 
 
+
+
+
+
+
+
+
+
+
 def success(request):
-    return render(request, 'cart/success.html', {})
+    return render(request, 'cart/success.html')

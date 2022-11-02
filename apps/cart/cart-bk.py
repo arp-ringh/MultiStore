@@ -63,4 +63,3 @@ class Cart(object):
         grand_total = get_total_cost + shipping
 
         return grand_total
-

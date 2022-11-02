@@ -106,7 +106,9 @@
                             <h5>Total</h5>
                             <h5>${{ cart.grand_total }}</h5>
                         </div>
+                        <a href="{% url 'cart:checkout' %}">
                         <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -130,3 +132,4 @@
 
     
     {% endblock  %}
+
