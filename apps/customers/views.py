@@ -34,4 +34,5 @@ class customerSignUpView(CreateView):
 def customerDash(request):
     views = {}
 
+    #return redirect('cart:checkout')
     return render(request, 'customers/customer-dash.html', views )

@@ -47,12 +47,22 @@ class frontpage(BaseView):
 
         # Check if a user is logged in and is authenticated for views
         if request.user.is_authenticated:
+            """
             if request.user.is_customer:
                 return redirect('customers:customerdash')
             elif request.user.is_vendor:
                 return redirect('vendor:vendordash')
             else:
                 return redirect('admin/')
+            """
+
+            if request.user.is_vendor:
+                return redirect('vendor:vendordash')
+            elif request.user.is_superuser:
+                return redirect('admin/')
+            else:
+                return render(request, 'store/frontpage.html',self.views)
+
         else:
             return render(request, 'store/frontpage.html',self.views)
 

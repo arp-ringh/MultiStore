@@ -7,6 +7,8 @@ from .cart import Cart
 from .forms import CheckoutForm
 from apps.order.utilities import checkout, notify_vendor, notify_customer
 
+from apps.customers.decorators import customer_required
+from django.contrib.auth.decorators import login_required
 
 def cart_detail(request):
     cart = Cart(request)
@@ -27,6 +29,9 @@ def cart_detail(request):
     return render(request, 'cart/cart.html', {})
 
 
+
+@login_required
+@customer_required
 def cart_checkout(request):
     cart = Cart(request)
     if request.method == 'POST':
