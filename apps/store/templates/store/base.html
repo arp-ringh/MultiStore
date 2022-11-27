@@ -36,10 +36,10 @@
         <div class="row bg-secondary py-1 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
                 <div class="d-inline-flex align-items-center h-100">
-                    <a class="text-body mr-3" href="{% url 'store:about' %}">About</a>
+                    <a class="text-body mr-3" href="{% url 'store:frontpage' %}">About</a>
                     <a class="text-body mr-3" href="{% url 'store:contact' %}">Contact</a>
-                    <a class="text-body mr-3" href="{% url 'store:help' %}">Help</a>
-                    <a class="text-body mr-3" href="{% url 'store:faqs' %}">FAQs</a>
+                    <a class="text-body mr-3" href="{% url 'store:frontpage' %}">Help</a>
+                    <a class="text-body mr-3" href="{% url 'store:frontpage' %}">FAQs</a>
                     {% if not request.user.is_authenticated  %}
                     <a class="text-body mr-3" href="{% url 'vendor:vendor' %}">Vendor</a>
                     <a class="text-body mr-3" href="{% url 'customers:customer' %}">Customers</a>
@@ -178,13 +178,13 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="/" class="nav-item nav-link active">Home</a>
-                            <a href="shop" class="nav-item nav-link">Shop</a>
-                            <a href="detail" class="nav-item nav-link">Shop Detail</a>
+                            <a href="{% url 'product:category' 'womens-fashion' %}" class="nav-item nav-link">Shop</a>
+                            <a href="{% url 'product:product' 'mens-fashion' 'aenean-imperdiet' %}" class="nav-item nav-link">Shop Detail</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
                                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="cart" class="dropdown-item">Shopping Cart</a>
-                                    <a href="checkout" class="dropdown-item">Checkout</a>
+                                    <a href="{% url 'cart:cart' %}" class="dropdown-item">Shopping Cart</a>
+                                    <a href="{% url 'cart:checkout' %}" class="dropdown-item">Checkout</a>
                                 </div>
                             </div>
                             <a href="contact" class="nav-item nav-link">Contact</a>

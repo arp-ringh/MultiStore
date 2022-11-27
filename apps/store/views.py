@@ -4,6 +4,7 @@ from django.views.generic import View
 from django.contrib.auth import login, logout
 from django.contrib import messages, auth
 
+from django.core.mail import EmailMessage
 
 from . models import *
 
@@ -71,6 +72,7 @@ def store(request):
     views = {}
     return render(request, 'index.html', views)
 """
+"""
 
 def contact(request):
     views = {}
@@ -103,10 +105,32 @@ def help(request):
 def faqs(request):
     views = {}
     return render(request, 'store/faqs.html', views)
-
+"""
 
 
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+def contact(request):
+    if request.method == "POST":
+        name = request.POST['name']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        message = request.POST['message']
+
+        data = Contact.objects.create(name=name, email=email, subject=subject, message=message)
+        data.save()
+
+    try:
+        email = EmailMessage('Hello', 'Thanks! For Messaging Us, We will get back to you soon.', 'arpringh@zohomail.com', [email])
+        email.send()
+    except:
+        pass
+    else:
+        messages.success(request,'Email has sent !')
+        return redirect('store:frontpage')
+
+
+    return render(request, 'store/contact.html')
 

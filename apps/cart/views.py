@@ -3,6 +3,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
+from apps.order.models import OrderItem
+
 from .cart import Cart
 from .forms import CheckoutForm
 from apps.order.utilities import checkout, notify_vendor, notify_customer
@@ -74,5 +76,12 @@ def cart_checkout(request):
     return render(request, 'cart/cartcheckout.html', {'form': form, 'stripe_pub_key': settings.STRIPE_PUB_KEY})
 
 
-def success(request):
-    return render(request, 'cart/success.html', {})
+@login_required
+@customer_required
+def checkout_success(request):
+    current_user = request.user
+    orderitems = OrderItem.objects.all()
+
+
+
+    return render(request, 'cart/success.html', {'orderitems':orderitems, 'current_user':current_user})

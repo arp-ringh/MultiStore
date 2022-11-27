@@ -7,6 +7,7 @@ from django.views.generic import CreateView, View
 from django.contrib.auth import login, logout
 from django.contrib import messages, auth
 
+from apps.customers.models import Customer
 from apps.customers.decorators import customer_required
 from django.contrib.auth.decorators import login_required
 
@@ -26,6 +27,7 @@ class customerSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
+        customer = Customer.objects.create(name=user.username,created_by=user)
         return redirect('customers:customerdash')
 
 

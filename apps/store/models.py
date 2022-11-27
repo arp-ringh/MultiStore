@@ -37,6 +37,7 @@ class Slider(models.Model):
 class Contact(models.Model):
     name = models.CharField(max_length=400)
     email = models.EmailField(max_length=400, blank=True)
+    subject = models.CharField(max_length=400)
     message = models.TextField()
 
     def __str__(self):
