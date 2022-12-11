@@ -1,0 +1,9 @@
+
+kpython:S2208	"GImport only needed names or import the module and then use its members.(ÅÙï„úÿÿÿÿ8ªÕÛ½Ì0
+=python:S125#"Remove this commented out code.(¤ÎØ×8«ÕÛ½Ì0
+Bpython:S125'"Remove this commented out code.(„ÞŸ­ûÿÿÿÿ8«ÕÛ½Ì0
+=python:S125/"Remove this commented out code.(¿¥£Š8¬ÕÛ½Ì0
+=python:S1253"Remove this commented out code.(…Óµ•8¬ÕÛ½Ì0
+=python:S125F"Remove this commented out code.(…Óµ•8¬ÕÛ½Ì0
+=python:S125K"Remove this commented out code.(…Óµ•8­ÕÛ½Ì0
+\python:S5754€"<Specify an exception class to catch or reraise the exception(ˆÊÉ·8­ÕÛ½Ì0
