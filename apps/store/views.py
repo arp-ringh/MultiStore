@@ -134,3 +134,40 @@ def contact(request):
 
     return render(request, 'store/contact.html')
 
+
+
+
+
+
+
+
+
+#######################################
+## FOR API ############################
+# ViewSets define the view behavior.
+
+
+
+from rest_framework import routers, serializers, viewsets
+from .serializers import *
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+#########################################
+## Generic
+
+import django_filters.rest_framework
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets, generics
+from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework import generics
+
+
+class ProductListView(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = (DjangoFilterBackend,OrderingFilter,SearchFilter)
+    filter_fields = ['id','name','price','labels','category','subcategory']
+    ordering_fields = ['price','category','id']
+    search_fields = ['name','description','overview']
